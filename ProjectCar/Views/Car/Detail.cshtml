@@ -1,0 +1,36 @@
+﻿@model CarEditViewModel
+@{
+    ViewData["Title"] = "Car Detail";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <form asp-controller="Car" asp-action="Save" method="post">
+                <input type="hidden" asp-for="Id" />
+
+                <div class="form-group">
+                    <label asp-for="LicensePlate">LicensePlate:</label>
+                    <input type="text" asp-for="LicensePlate" placeholder="License plate." />
+                    <span asp-validation-for="LicensePlate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Purchase">Purchased date:</label>
+                    <input type="date" asp-for="Purchase" />
+                    <span asp-validation-for="Purchase" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Owner">Current Owner:</label>
+                    <select asp-for="OwnerId" asp-items="Model.Owners"></select>
+                    <span asp-validation-for="Owner" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CarType">CarType:</label>
+                    <select asp-for="CarTypeId" asp-items="Model.CarTypes"></select>
+                    <span asp-validation-for="CarType" class="text-danger"></span>
+                </div>
+                <input type="submit" />
+            </form>
+        </div>
+    </div>
+</div>

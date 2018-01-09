@@ -1,0 +1,48 @@
+﻿@model CarListViewModel
+@{
+    ViewData["Title"] = "All cars";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>CarName</td>
+                    <td>Brand</td>
+                    <td>Colour</td>
+                    <td>LicensePlate</td>
+                    <td>Owner</td>
+                </tr>
+            </thead>
+
+            @foreach (var car in Model.Cars)
+            {
+
+            <tr>
+                <td>
+                    <a asp-controller="Car" asp-action="Detail" asp-route-id="@car.Id">@car.CarType.Model</a>
+                </td>
+                <td>
+                    <a asp-controller="Car" asp-action="Detail" asp-route-id="@car.Id">@car.CarType.Brand</a>
+                </td>
+                <td>
+                    <a asp-controller="Car" asp-action="Detail" asp-route-id="@car.Id">@car.Colour</a>
+                </td>
+                <td>
+                    <a asp-controller="Car" asp-action="Detail" asp-route-id="@car.Id">@car.LicensePlate</a>
+                </td>
+                <td>
+                    <a asp-controller="Car" asp-action="Detail" asp-route-id="@car.Id">@car.Owner.FirstName @car.Owner.LastName</a>
+                </td>
+                <td>
+                    <form asp-controller="Car" asp-action="Delete" asp-route-id="@car.Id" method="post">
+                        <input type="submit" value="DEL" />
+                    </form>
+                </td>
+            </tr>
+            }
+
+        </table>
+    </div>
+</div>

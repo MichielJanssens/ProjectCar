@@ -1,0 +1,38 @@
+﻿@model OwnerListViewModel
+@{
+    ViewData["Title"] = "All owners";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            @foreach (var owner in Model.Owners)
+            {
+                <thead>
+                    <tr>
+                        <td>Owner: @owner.FirstName @owner.LastName</td>
+                    </tr>
+                </thead>
+
+                @foreach (var car in owner.Cars)
+                {
+
+                    <tr>
+                        <td>
+                            <a asp-controller="Car" asp-action="Detail" asp-route-id="@car.Id">@car.CarType.Brand</a>
+                        </td>
+                        <td>
+                            <a asp-controller="Car" asp-action="Detail" asp-route-id="@car.Id">@car.CarType.Model</a>
+                        </td>
+                        <td>
+                            <a asp-controller="Car" asp-action="Detail" asp-route-id="@car.Id">@car.Colour</a>
+                        </td>
+                        <td>
+                            <a asp-controller="Car" asp-action="Detail" asp-route-id="@car.Id">@car.LicensePlate</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>

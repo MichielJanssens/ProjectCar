@@ -1,0 +1,38 @@
+﻿@model CarTypeListViewModel
+@{
+    ViewData["Title"] = "All brands";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            @foreach (var brand in Model.Brands)
+            {
+                <thead>
+                    <tr>
+                        <td>Brand: @brand.Name</td>
+                    </tr>
+                </thead>
+
+                @foreach (var car in brand.Cars)
+                {
+
+                    <tr>
+                        <td>
+                            <a asp-controller="Car" asp-action="Detail" asp-route-id="@car.Id">@car.CarType.Model</a>
+                        </td>
+                        <td>
+                            <a asp-controller="Car" asp-action="Detail" asp-route-id="@car.Id">@car.Colour</a>
+                        </td>
+                        <td>
+                            <a asp-controller="Car" asp-action="Detail" asp-route-id="@car.Id">@car.LicensePlate</a>
+                        </td>
+                        <td>
+                            <a asp-controller="Car" asp-action="Detail" asp-route-id="@car.Id">@car.Owner.FirstName @car.Owner.LastName</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>

@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ProjectCar.Data;
+using Microsoft.EntityFrameworkCore;
+using ProjectCar.Services;
+using Autos.Data;
 
 namespace ProjectCar
 {
@@ -21,11 +25,13 @@ namespace ProjectCar
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<EntityContext>(options => options.UseInMemoryDatabase("Cars"));
+            services.AddScoped<ICarService, CarService>();
             services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, EntityContext entityContext)
         {
             if (env.IsDevelopment())
             {
@@ -38,6 +44,7 @@ namespace ProjectCar
             }
 
             app.UseStaticFiles();
+            DatabaseInitializer.InitializeDatabase(entityContext);
 
             app.UseMvc(routes =>
             {
